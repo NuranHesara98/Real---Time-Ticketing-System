@@ -6,6 +6,7 @@ public class TicketingSystemCLI {
     static int ticketReleaseRate;
     static int customerRetrievalRate;
     static int maxTicketCapacity;
+    static boolean isSystemRunning = false;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -30,9 +31,6 @@ public class TicketingSystemCLI {
                     break;
                 case 2:
                     stopTicketingSystem();
-                    scanner.close();
-                    System.out.println("Exiting the system. Goodbye!");
-                    return;
                 case 3:
                     viewRealTimeStatus();
                     break;
@@ -68,6 +66,8 @@ public class TicketingSystemCLI {
         System.out.println("Ticket Release Rate: " + ticketReleaseRate + " tickets/min");
         System.out.println("Customer Retrieval Rate: " + customerRetrievalRate + " tickets/min");
         System.out.println("Max Ticket Capacity: " + maxTicketCapacity);
+
+        isSystemRunning = true;
         System.out.println("\nTicketing system has been successfully started!");
     }
 
@@ -89,19 +89,34 @@ public class TicketingSystemCLI {
 
     // Method to stop the ticketing system
     public static void stopTicketingSystem() {
-        System.out.println("\nStopping the Ticketing System...");
+        if (!isSystemRunning) {
+            System.out.println("\nThe system is not currently running.");
+            return;
 
+        }
+            System.out.println("\nStopping the Ticketing System.");
+
+            isSystemRunning = false;
+            System.out.println("\nTicketing system has been successfully stopped.");
     }
 
-    // Method to view real-time status (this could show ticket availability, etc.)
+    // Method to view real-time status
     public static void viewRealTimeStatus() {
-        System.out.println("\nViewing Real-Time Status...");
+            if (!isSystemRunning) {
+                System.out.println("\nThe system is not running. Start the system first.");
+                return;  // Prevent viewing status if the system is stopped
+            }
 
+            System.out.println("\nViewing Real-Time Status...");
+        }
+
+        public static void viewLog() {
+            if (!isSystemRunning) {
+                System.out.println("\nThe system is not running. Start the system first.");
+                return;  // Prevent viewing logs if the system is stopped
+            }
+
+            System.out.println("\nViewing Logs...");
+            // Display system logs such as ticket transactions, configuration changes, etc.
+        }
     }
-
-    // Method to view logs
-    public static void viewLog() {
-        System.out.println("\nViewing Logs...");
-
-    }
-}
