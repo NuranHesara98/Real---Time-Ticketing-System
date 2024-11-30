@@ -14,33 +14,39 @@ public class TicketingSystemCLI {
 
         // Main Menu
         while (!exit) {
-            System.out.println("\n==========================================");
-            System.out.println("        Real-Time Ticketing System");
-            System.out.println("==========================================");
-            System.out.println("1. Start Ticketing System");
-            System.out.println("2. Stop Ticketing System");
-            System.out.println("3. View Real-Time Status");
-            System.out.println("4. View Logs");
-            System.out.print("Enter your choice: ");
+           try {
+               System.out.println("\n==========================================");
+               System.out.println("        Real-Time Ticketing System");
+               System.out.println("============================================");
+               System.out.println("1. Start Ticketing System");
+               System.out.println("2. Stop Ticketing System");
+               System.out.println("3. View Real-Time Status");
+               System.out.println("4. View Logs");
+               System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+               int choice = scanner.nextInt();
 
-            switch (choice) {
-                case 1:
-                    startTicketingSystem(scanner);
-                    break;
-                case 2:
-                    stopTicketingSystem();
-                case 3:
-                    viewRealTimeStatus();
-                    break;
-                case 4:
-                    viewLog();
-                    break;
-                default:
-                    System.out.println("Invalid choice! Please select a valid option");
-            }
+               switch (choice) {
+                   case 1:
+                       startTicketingSystem(scanner);
+                       break;
+                   case 2:
+                       stopTicketingSystem();
+                   case 3:
+                       viewRealTimeStatus();
+                       break;
+                   case 4:
+                       viewLog();
+                       break;
+                   default:
+                       System.out.println("Invalid choice! Please select a valid option");
+               }
+           }catch (Exception e){
+               System.out.println("Invalid Input! Please enter a valid menu option (1 - 4)");
+               scanner.next();
+           }
         }
+        scanner.close();
     }
 
     // Method to start the ticketing system and collect configuration values
@@ -48,17 +54,10 @@ public class TicketingSystemCLI {
         System.out.println("\nStarting the Ticketing System...");
 
         // Collect system configuration parameters
-        System.out.print("Enter total number of tickets: ");
-        totalTickets = getValidInput(scanner);
-
-        System.out.print("Enter ticket release rate (tickets per minute): ");
-        ticketReleaseRate = getValidInput(scanner);
-
-        System.out.print("Enter customer retrieval rate (tickets per minute): ");
-        customerRetrievalRate = getValidInput(scanner);
-
-        System.out.print("Enter max ticket capacity: ");
-        maxTicketCapacity = getValidInput(scanner);
+        totalTickets = getValidInput(scanner, "Enter total number of tickets: ");
+        ticketReleaseRate = getValidInput(scanner, "Enter ticket release rate (tickets per minute): ");
+        customerRetrievalRate = getValidInput(scanner, "Enter customer retrieval rate (tickets per minute): ");
+        maxTicketCapacity = getValidInput(scanner, "Enter max ticket capacity: ");
 
         // Display the configured parameters
         System.out.println("\nSystem Configuration:");
@@ -71,21 +70,30 @@ public class TicketingSystemCLI {
         System.out.println("\nTicketing system has been successfully started!");
     }
 
-    private static int getValidInput(Scanner scanner) {
+    private static int getValidInput(Scanner scanner, String prompt) {
         int input = -1;
-        while (input <= 0) {
-            if (scanner.hasNextInt()) {
+        boolean valid = false;
+
+        while (!valid) {
+            try {
+                System.out.print(prompt);
                 input = scanner.nextInt();
+
+                // Check if the input is a positive number
                 if (input <= 0) {
-                    System.out.println("Please enter a positive number.");
+                    System.out.println("Invalid input! Please enter a positive number greater than 0.");
+                } else {
+                    valid = true;
                 }
-            } else {
-                System.out.println("Invalid input! Please enter a valid integer.");
+
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter a valid number.");
                 scanner.next();
             }
         }
         return input;
     }
+
 
     // Method to stop the ticketing system
     public static void stopTicketingSystem() {
@@ -95,7 +103,6 @@ public class TicketingSystemCLI {
 
         }
             System.out.println("\nStopping the Ticketing System.");
-
             isSystemRunning = false;
             System.out.println("\nTicketing system has been successfully stopped.");
     }
@@ -104,7 +111,7 @@ public class TicketingSystemCLI {
     public static void viewRealTimeStatus() {
             if (!isSystemRunning) {
                 System.out.println("\nThe system is not running. Start the system first.");
-                return;  // Prevent viewing status if the system is stopped
+                return;
             }
 
             System.out.println("\nViewing Real-Time Status...");
@@ -113,10 +120,10 @@ public class TicketingSystemCLI {
         public static void viewLog() {
             if (!isSystemRunning) {
                 System.out.println("\nThe system is not running. Start the system first.");
-                return;  // Prevent viewing logs if the system is stopped
+                return;
             }
 
             System.out.println("\nViewing Logs...");
-            // Display system logs such as ticket transactions, configuration changes, etc.
+
         }
     }
