@@ -6,6 +6,7 @@ public class TicketingSystemCLI {
     static int ticketReleaseRate;
     static int customerRetrievalRate;
     static int maxTicketCapacity;
+    static configurations config;
     static boolean isSystemRunning = false;
 
     public static void main(String[] args) {
@@ -54,17 +55,20 @@ public class TicketingSystemCLI {
         System.out.println("\nStarting the Ticketing System...");
 
         // Collect system configuration parameters
-        totalTickets = getValidInput(scanner, "Enter total number of tickets: ");
-        ticketReleaseRate = getValidInput(scanner, "Enter ticket release rate (tickets per minute): ");
-        customerRetrievalRate = getValidInput(scanner, "Enter customer retrieval rate (tickets per minute): ");
-        maxTicketCapacity = getValidInput(scanner, "Enter max ticket capacity: ");
+        int totalTickets = getValidInput(scanner, "Enter total number of tickets: ");
+        int ticketReleaseRate = getValidInput(scanner, "Enter ticket release rate (tickets per minute): ");
+        int customerRetrievalRate = getValidInput(scanner, "Enter customer retrieval rate (tickets per minute): ");
+        int maxTicketCapacity = getValidInput(scanner, "Enter max ticket capacity: ");
+
+        //Initialize the configuration object
+        config = new configurations(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
 
         // Display the configured parameters
         System.out.println("\nSystem Configuration:");
-        System.out.println("Total Tickets: " + totalTickets);
-        System.out.println("Ticket Release Rate: " + ticketReleaseRate + " tickets/min");
-        System.out.println("Customer Retrieval Rate: " + customerRetrievalRate + " tickets/min");
-        System.out.println("Max Ticket Capacity: " + maxTicketCapacity);
+        System.out.println("Total Tickets: " + config.getTotalTickets());
+        System.out.println("Ticket Release Rate: " + config.getTicketReleaseRate());
+        System.out.println("Customer Retrieval Rate: " + config.getCustomerRetrievalRate());
+        System.out.println("Max Ticket Capacity: " + config.getMaxTicketCapacity());
 
         isSystemRunning = true;
         System.out.println("\nTicketing system has been successfully started!");
