@@ -4,15 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cb43ecb-0086-4cf0-8019-6e13190619e6" name="Changes" comment="Create the menu for the CLI">
-      <change afterPath="$PROJECT_DIR$/src/TicketingSystemCLI.java" afterDir="false" />
+    <list default="true" id="6cb43ecb-0086-4cf0-8019-6e13190619e6" name="Changes" comment="create the configurations class and connect it to the main class">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ConfigurationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ticketing_System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ticketing_System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TicketingSystemCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicketingSystemCLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Configuration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -22,6 +33,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,8 +43,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.TicketingSystemCLI.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -38,6 +58,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
@@ -50,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732849530902</updated>
-      <workItem from="1732849532575" duration="1751000" />
+      <workItem from="1732849532575" duration="34960000" />
     </task>
     <task id="LOCAL-00001" summary="Created project for ticketing system">
       <option name="closed" value="true" />
@@ -68,7 +91,39 @@
       <option name="project" value="LOCAL" />
       <updated>1732850251957</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add All configurations and methods use for the Menu">
+      <option name="closed" value="true" />
+      <created>1732855353613</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732855353613</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Implement the Stopticketingsystem in menu">
+      <option name="closed" value="true" />
+      <created>1732864881838</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732864881838</updated>
+    </task>
+    <task id="LOCAL-00005" summary="create the exception handling in Menu and getvalidinput method">
+      <option name="closed" value="true" />
+      <created>1732951589814</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732951589814</updated>
+    </task>
+    <task id="LOCAL-00006" summary="create the configurations class and connect it to the main class">
+      <option name="closed" value="true" />
+      <created>1732953971708</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732953971708</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,6 +155,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created project for ticketing system" />
     <MESSAGE value="Create the menu for the CLI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create the menu for the CLI" />
+    <MESSAGE value="Add All configurations and methods use for the Menu" />
+    <MESSAGE value="Implement the Stopticketingsystem in menu" />
+    <MESSAGE value="create the exception handling in Menu and getvalidinput method" />
+    <MESSAGE value="create the configurations class and connect it to the main class" />
+    <option name="LAST_COMMIT_MESSAGE" value="create the configurations class and connect it to the main class" />
   </component>
 </project>
