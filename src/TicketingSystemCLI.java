@@ -1,10 +1,14 @@
-import java.io.*;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TicketingSystemCLI {
+    // Global variables to store system configurations and shared resources
     static Configuration config;
     static boolean isSystemRunning = false;
     static boolean isConfigured = false;  // Flag to check if the system has been configured
+    static int availableTickets;
+    static Lock ticketLock = new ReentrantLock();  // Lock for synchronizing access to available tickets
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -48,7 +52,6 @@ public class TicketingSystemCLI {
         scanner.close();
     }
 
-    // Method to start the ticketing system and collect configuration values
     public static void startTicketingSystem(Scanner scanner) {
         if (isConfigured) {
             System.out.println("\nThe system is already configured. You cannot reconfigure it until the system is stopped.");
@@ -65,7 +68,10 @@ public class TicketingSystemCLI {
 
         // Initialize the configuration object with new values
         config = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
-        saveConfigurationToJson(); // Save the new configuration to a new JSON file
+        saveConfigurationToJson(); // Save the new configuration to JSON
+
+        // Initialize available tickets based on the configuration
+        availableTickets = totalTickets;
 
         // Display the collected configuration
         System.out.println("\nSystem Configuration:");
@@ -77,7 +83,13 @@ public class TicketingSystemCLI {
         isSystemRunning = true; // Mark the system as running
         isConfigured = true; // Mark the system as configured
         System.out.println("\nTicketing system has been successfully started!");
+
+        // Start a few customer threads (for simulation)
+        for (int i = 1; i <= 5; i++) { // Simulating 5 customers for example
+            new Thread(new TicketConsumer(i, 3, ticketLock, new TicketingSystemCLI())).start(); // Each customer requests 3 tickets
+        }
     }
+
 
     // Method to stop the ticketing system
     public static void stopTicketingSystem() {
@@ -87,7 +99,7 @@ public class TicketingSystemCLI {
         }
         System.out.println("\nStopping the Ticketing System.");
         isSystemRunning = false;
-        isConfigured = false;
+        isConfigured = false; // Reset the configuration status
         config = null; // Reset configuration to ensure fresh input next time
         System.out.println("\nTicketing system has been successfully stopped.");
     }
@@ -134,33 +146,23 @@ public class TicketingSystemCLI {
         return input;
     }
 
-    // Save the current configuration to a uniquely named JSON file
+    // Save the current configuration to a JSON file
     public static void saveConfigurationToJson() {
         if (config == null) {
             System.out.println("No configuration to save. Please start the system first.");
             return;
         }
-        // Generate a unique file name based on existing files
-        String fileName = generateUniqueFileName();
-        ConfigurationManager.saveConfigurationToJson(config, fileName); // Save the configuration to a unique file
-        System.out.println("Configuration saved to " + fileName);
+        String configFileName = "config.json";
+        ConfigurationManager.saveConfigurationToJson(config, configFileName); // Save the configuration
     }
 
-    // Method to generate a unique file name based on existing files
-    private static String generateUniqueFileName() {
-        int fileIndex = 1;
-        File dir = new File(".");  // Current directory
-        String baseFileName = "ConfigurationSettings_";
-        String fileExtension = ".json";
+    // Getter for available tickets (used by TicketConsumer)
+    public int getAvailableTickets() {
+        return availableTickets;
+    }
 
-        // Loop to find the next available file name
-        while (true) {
-            String fileName = baseFileName + String.format("%03d", fileIndex) + fileExtension;
-            File file = new File(fileName);
-            if (!file.exists()) {
-                return fileName;  // Return the first non-existing file name
-            }
-            fileIndex++;  // Increment file index to check the next file
-        }
+    // Method to reduce available tickets (used by TicketConsumer)
+    public void reduceAvailableTickets(int tickets) {
+        availableTickets -= tickets;
     }
 }
